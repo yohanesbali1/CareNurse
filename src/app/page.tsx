@@ -1,65 +1,72 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useState, useEffect, useRef } from 'react';
+import { SplashScreen } from '@/components/common/SplashScreen';
+import { ScrollProgress } from '@/components/common/ScrollProgress';
+import { ScrollReveal } from '@/components/common/ScrollReveal';
+import { FloatingWhatsApp } from '@/components/common/FloatingWhatsApp';
+import { BackToTop } from '@/components/common/BackToTop';
+import { TopNotice } from '@/components/sections/TopNotice';
+import { Header } from '@/components/sections/Header';
+import { Hero } from '@/components/sections/Hero';
+import { TrustBadges } from '@/components/sections/TrustBadges';
+import { Services } from '@/components/sections/Services';
+import { Calculator } from '@/components/sections/Calculator';
+import { WhyChooseUs } from '@/components/sections/WhyChooseUs';
+import { Pricing } from '@/components/sections/Pricing';
+import { HowItWorks } from '@/components/sections/HowItWorks';
+import { Testimonials } from '@/components/sections/Testimonials';
+import { FAQ } from '@/components/sections/FAQ';
+import { CTA } from '@/components/sections/CTA';
+import { Footer } from '@/components/sections/Footer';
+import { WHATSAPP_DEFAULT_CONFIG } from '@/lib/constants';
+
+export default function HomePage() {
+  const [phoneNumber, setPhoneNumber] = useState(WHATSAPP_DEFAULT_CONFIG.phoneNumber);
+  const [progress, setProgress] = useState(0);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const bookingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const currentScroll = window.scrollY;
+      setProgress(totalScroll > 0 ? (currentScroll / totalScroll) * 100 : 0);
+      setShowBackToTop(currentScroll > 400);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const scrollToBooking = () => {
+    if (bookingRef.current) {
+      bookingRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <SplashScreen />
+      <ScrollProgress progress={progress} />
+      <TopNotice phoneNumber={phoneNumber} onPhoneChange={setPhoneNumber} />
+      <Header phoneNumber={phoneNumber} />
+      <div ref={bookingRef}>
+        <Hero phoneNumber={phoneNumber} onBookNow={scrollToBooking} />
+      </div>
+      <ScrollReveal><TrustBadges /></ScrollReveal>
+      <Services phoneNumber={phoneNumber} />
+      <ScrollReveal delay={100}><Calculator phoneNumber={phoneNumber} /></ScrollReveal>
+      <ScrollReveal delay={100}><WhyChooseUs /></ScrollReveal>
+      <ScrollReveal delay={100}><Pricing phoneNumber={phoneNumber} /></ScrollReveal>
+      <ScrollReveal delay={100}><HowItWorks /></ScrollReveal>
+      <ScrollReveal delay={100}><Testimonials /></ScrollReveal>
+      <ScrollReveal delay={100}><FAQ /></ScrollReveal>
+      <ScrollReveal delay={100}><CTA phoneNumber={phoneNumber} /></ScrollReveal>
+      <ScrollReveal delay={100}><Footer phoneNumber={phoneNumber} /></ScrollReveal>
+      <FloatingWhatsApp phoneNumber={phoneNumber} />
+      <BackToTop visible={showBackToTop} onClick={scrollToTop} />
+    </>
   );
 }
