@@ -17,7 +17,7 @@ export function FloatingWhatsApp({ phoneNumber = WHATSAPP_DEFAULT_CONFIG.phoneNu
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-40">
+    <div className="fixed z-10 bottom-6 right-6 z-40">
       <button
         onClick={handleClick}
         className="group flex items-center bg-wa-500 hover:bg-wa-600 text-white p-4 rounded-full shadow-2xl shadow-wa-500/50 transition-all duration-300 hover:scale-110 relative"

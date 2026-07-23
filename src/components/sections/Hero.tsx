@@ -1,9 +1,15 @@
-'use client';
+"use client";
 
-import { CalendarPlus, PhoneCall, CheckCircle2, ClipboardCheck, Send } from 'lucide-react';
-import { useState } from 'react';
-import { cn } from '@/lib/utils';
-import { generateWhatsAppMessage, getWhatsAppUrl } from '@/lib/utils';
+import {
+  CalendarPlus,
+  PhoneCall,
+  CheckCircle2,
+  ClipboardCheck,
+  Send,
+} from "lucide-react";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { generateWhatsAppMessage, getWhatsAppUrl } from "@/lib/utils";
 
 interface HeroProps {
   phoneNumber: string;
@@ -12,11 +18,11 @@ interface HeroProps {
 
 export function Hero({ phoneNumber, onBookNow }: HeroProps) {
   const [form, setForm] = useState({
-    name: '',
-    service: 'Perawatan Luka Medis / Diabetes',
-    location: '',
-    time: '',
-    notes: '',
+    name: "",
+    service: "Perawatan Luka Medis / Diabetes",
+    location: "",
+    time: "",
+    notes: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -26,20 +32,25 @@ export function Hero({ phoneNumber, onBookNow }: HeroProps) {
       patientName: form.name,
       location: form.location,
       dateTime: form.time,
-      notes: form.notes || 'Tidak ada catatan khusus.',
+      notes: form.notes || "Tidak ada catatan khusus.",
     });
-    window.open(getWhatsAppUrl(phoneNumber, message), '_blank');
+    window.open(getWhatsAppUrl(phoneNumber, message), "_blank");
   };
 
   const handleConsult = () => {
-    const message = generateWhatsAppMessage({ service: 'Tanya Syarat & Konsultasi Perawat' });
-    window.open(getWhatsAppUrl(phoneNumber, message), '_blank');
+    const message = generateWhatsAppMessage({
+      service: "Tanya Syarat & Konsultasi Perawat",
+    });
+    window.open(getWhatsAppUrl(phoneNumber, message), "_blank");
   };
 
   return (
     <section className="gradient-bg relative overflow-hidden pt-10 pb-20 lg:py-24">
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-brand-400/20 rounded-full blur-3xl pointer-events-none animate-pulse" />
-      <div className="absolute top-1/2 -right-24 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl pointer-events-none animate-pulse" style={{ animationDelay: '1s' }} />
+      <div
+        className="absolute top-1/2 -right-24 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl pointer-events-none animate-pulse"
+        style={{ animationDelay: "1s" }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -60,8 +71,10 @@ export function Hero({ phoneNumber, onBookNow }: HeroProps) {
             </h1>
 
             <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              Pendampingan medis steril dan telaten untuk pasien pasca operasi, perawatan luka diabetes,
-              ganti alat (infus/kateter/NGT), hingga jaga lansia 24 jam. Respon cepat &amp; langsung ditangani via WhatsApp.
+              Layanan IV Drip profesional oleh tenaga kesehatan berpengalaman
+              untuk membantu pemulihan Immune Booster, Flu &amp; Cough, Fever,
+              Hangover, hingga Bali Belly (diare). Praktis, aman, dan nyaman
+              langsung di lokasi Anda.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
@@ -83,16 +96,28 @@ export function Hero({ phoneNumber, onBookNow }: HeroProps) {
 
             <div className="pt-8 border-t border-slate-200/80 grid grid-cols-3 gap-4 text-center lg:text-left">
               <div className="space-y-1">
-                <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">850+</div>
-                <div className="text-xs text-slate-500 font-medium">Pasien Terlayani</div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                  850+
+                </div>
+                <div className="text-xs text-slate-500 font-medium">
+                  Pasien Terlayani
+                </div>
               </div>
               <div className="space-y-1">
-                <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">100%</div>
-                <div className="text-xs text-slate-500 font-medium">STR Resmi Active</div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                  100%
+                </div>
+                <div className="text-xs text-slate-500 font-medium">
+                  STR Resmi Active
+                </div>
               </div>
               <div className="space-y-1">
-                <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">&lt; 30 m</div>
-                <div className="text-xs text-slate-500 font-medium">Respon Cepat WA</div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                  &lt; 30 m
+                </div>
+                <div className="text-xs text-slate-500 font-medium">
+                  Respon Cepat WA
+                </div>
               </div>
             </div>
           </div>
@@ -108,14 +133,20 @@ export function Hero({ phoneNumber, onBookNow }: HeroProps) {
                   <ClipboardCheck className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-extrabold text-slate-900 text-lg">Pesan Panggilan Perawat</h3>
-                  <p className="text-xs text-slate-500">Isi singkat untuk terhubung ke WhatsApp</p>
+                  <h3 className="font-extrabold text-slate-900 text-lg">
+                    Pesan Panggilan Perawat
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    Isi singkat untuk terhubung ke WhatsApp
+                  </p>
                 </div>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Nama Pasien / Pemesan</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Nama Pasien / Pemesan
+                  </label>
                   <input
                     type="text"
                     required
@@ -128,27 +159,47 @@ export function Hero({ phoneNumber, onBookNow }: HeroProps) {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Jenis Perawatan</label>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Jenis Perawatan
+                    </label>
                     <select
                       value={form.service}
-                      onChange={(e) => setForm({ ...form, service: e.target.value })}
+                      onChange={(e) =>
+                        setForm({ ...form, service: e.target.value })
+                      }
                       className="w-full px-3 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-sm bg-white"
                     >
-                      <option value="Perawatan Luka Medis / Diabetes">Perawatan Luka Medis</option>
-                      <option value="Pemasangan Infus / NGT / Kateter">Pasang Infus / Kateter</option>
-                      <option value="Pendampingan Lansia (Home Care)">Pendamping Lansia</option>
-                      <option value="Perawat Pasca Operasi / Stroke">Pasca Operasi / Stroke</option>
-                      <option value="Suntik Vitamin / Vaksinasi">Suntik Vitamin / Booster</option>
-                      <option value="Perawat Standby 24 Jam">Perawat Standby 24 Jam</option>
+                      <option value="Perawatan Luka Medis / Diabetes">
+                        Perawatan Luka Medis
+                      </option>
+                      <option value="Pemasangan Infus / NGT / Kateter">
+                        Pasang Infus / Kateter
+                      </option>
+                      <option value="Pendampingan Lansia (Home Care)">
+                        Pendamping Lansia
+                      </option>
+                      <option value="Perawat Pasca Operasi / Stroke">
+                        Pasca Operasi / Stroke
+                      </option>
+                      <option value="Suntik Vitamin / Vaksinasi">
+                        Suntik Vitamin / Booster
+                      </option>
+                      <option value="Perawat Standby 24 Jam">
+                        Perawat Standby 24 Jam
+                      </option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Kota / Domisili</label>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Kota / Domisili
+                    </label>
                     <input
                       type="text"
                       required
                       value={form.location}
-                      onChange={(e) => setForm({ ...form, location: e.target.value })}
+                      onChange={(e) =>
+                        setForm({ ...form, location: e.target.value })
+                      }
                       placeholder="Contoh: Jakarta Selatan"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-sm transition-all"
                     />
@@ -156,7 +207,9 @@ export function Hero({ phoneNumber, onBookNow }: HeroProps) {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Tanggal &amp; Jam Kunjungan</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Tanggal &amp; Jam Kunjungan
+                  </label>
                   <input
                     type="datetime-local"
                     required
@@ -167,11 +220,15 @@ export function Hero({ phoneNumber, onBookNow }: HeroProps) {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Catatan Keluhan Singkat</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Catatan Keluhan Singkat
+                  </label>
                   <textarea
                     rows={2}
                     value={form.notes}
-                    onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                    onChange={(e) =>
+                      setForm({ ...form, notes: e.target.value })
+                    }
                     placeholder="Misal: Perawatan luka jahitan, minta ganti perban steril..."
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-sm resize-none"
                   />
